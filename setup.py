@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
-    long_description = readme_file.read()
+    long_description = f.read()
 
 with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
     requirements = f.readlines()

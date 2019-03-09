@@ -14,7 +14,6 @@ def handler(app, event, context, binary_support=True):
 
     try:
         environ = event_to_environ(event, context)
-        logger.info('loaded env %s', environ)
         with Response.from_app(app, environ) as response:
             result = {
                 'statusCode': response.status_code,
@@ -51,11 +50,11 @@ def encode_response_data(response, binary_support):
 
     if binary_support:
         mime = response.mimetype
-        if not mime.startswith("text/") or mime != "application/json":
+        if mime.startswith("text/") or mime == "application/json":
+            result['body'] = response.get_data(as_text=True)
+        else:
             result['body'] = base64.b64encode(response.data).decode('utf-8')
             result['isBase64Encoded'] = True
-        else:
-            result['body'] = response.data
     else:
         result['body'] = response.get_data(as_text=True)
 

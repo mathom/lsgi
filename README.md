@@ -25,7 +25,7 @@ def hello():
     return "Hello, World!"
 
 def lambda_handler(event, context):
-    return lsgi.handler(app, event, context, binary_support=False)
+    return lsgi.handler(app, event, context)
 ```
 
 To deploy this with [AWS SAM](https://github.com/awslabs/serverless-application-model), try this template:

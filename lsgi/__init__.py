@@ -100,7 +100,7 @@ def event_to_environ(event, context):
         environ['QUERY_STRING'] = urlencode(query_string)
 
     headers = { h.upper().replace('-','_'): v
-               for h,v in event.get('headers', {}).items() }
+               for h,v in (event.get('headers') or {}).items() }  # headers can be None
 
     forwarded_for = headers.get('X_FORWARDED_FOR', '')
     if ',' in forwarded_for:

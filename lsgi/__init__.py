@@ -95,7 +95,7 @@ def event_to_environ(event, context):
     mv_query_string = event.get('multiValueQueryStringParameters', {})
 
     if mv_query_string:
-        environ['QUERY_STRING'] = urlencode(mv_query_String, doseq=True)
+        environ['QUERY_STRING'] = urlencode(mv_query_string, doseq=True)
     elif query_string:
         environ['QUERY_STRING'] = urlencode(query_string)
 
